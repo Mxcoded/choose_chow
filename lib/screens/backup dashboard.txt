@@ -1,0 +1,183 @@
+import 'package:choose_chow/Utilities/asset_image_utility.dart';
+import 'package:choose_chow/Utilities/color_utility.dart';
+import 'package:choose_chow/screens/attachments/collection_widget.dart';
+import 'package:choose_chow/screens/attachments/icon_with_badge_ontop.dart';
+import 'package:choose_chow/screens/attachments/recipe_item_widget.dart';
+import 'package:choose_chow/screens/background_image_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        toolbarHeight: 10.h,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        leadingWidth: null,
+        title: Image.asset(
+          AssetImageUtility.logoHorizontal,
+          fit: BoxFit.fitHeight,
+          height: 5.h,
+        ),
+        actions: <Widget>[
+          const IconWithBadgeOntop(),
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 3.w,
+            ),
+            child: Icon(
+              Icons.shopping_cart_outlined,
+              size: 25.dp,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+      body: BackgroundImageWidget(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 5.w,
+          ),
+          child: ListView(
+            children: <Widget>[
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: RichText(
+                      textAlign: TextAlign.left,
+                      text: TextSpan(
+                          text: "Find what your cooking,",
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 24.dp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: " today",
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 24.dp,
+                                color: ColorUtility.primaryColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ]),
+                    ),
+                  ),
+                  Expanded(flex: 1, child: Container())
+                ],
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Search any recipe...",
+                  hintStyle: GoogleFonts.roboto(),
+                  filled: true,
+                  fillColor: Colors.white,
+                  prefixIcon: const Icon(
+                    Icons.search,
+                  ),
+                  suffixIcon: const Icon(
+                    FontAwesomeIcons.sliders,
+                    color: ColorUtility.hexadecimalGrayColor,
+                  ),
+                  border: const OutlineInputBorder(),
+                  disabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: ColorUtility.hexadecimalGrey03,
+                    ),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: ColorUtility.hexadecimalGrey03,
+                    ),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: ColorUtility.primaryColor,
+                      width: 0.2,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              SizedBox(
+                height: 20.h,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: 3.w,
+                      ),
+                      child: const CollectionWidget(
+                        collectionName: "Popular",
+                        imageUrl: AssetImageUtility.collectionImage1,
+                        isActive: true,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: 3.w,
+                      ),
+                      child: const CollectionWidget(
+                        collectionName: "Western",
+                        imageUrl: AssetImageUtility.collectionImage2,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: 3.w,
+                      ),
+                      child: const CollectionWidget(
+                        collectionName: "Local",
+                        imageUrl: AssetImageUtility.collectionImage3,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: 3.w,
+                      ),
+                      child: const CollectionWidget(
+                        collectionName: "Grilled",
+                        imageUrl: AssetImageUtility.collectionImage4,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        right: 3.w,
+                      ),
+                      child: const CollectionWidget(
+                        collectionName: "Drinks",
+                        imageUrl: AssetImageUtility.collectionImage1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const RecipeItemWidget()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
